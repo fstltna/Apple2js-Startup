@@ -1,0 +1,5 @@
+#!/usr/bin/perl
+
+my $APPLE2JSDIR = "";
+system("./bin/index");
+exit 0;
