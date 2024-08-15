@@ -11,6 +11,11 @@ These start up the apple2js server at boot time with a "screen" process.
 3. Copy **adsk2json** into **/home/apple2/bin** - make sure it is executable
 4. Copy **startapple2js** into **/home/apple2/apple2js** - make sure it is executable
 5. Put **@reboot /home/apple2/bin/apple2js start** into your crontab
+---
+To add disk images:
+
+1. Copy the disk image to be added to **/home/apple2/apple2js/json/disks**
+2. ZZZ
 
 When you want to view the Apple2js console, just enter "**screen -r**" in your shell.
 
