@@ -1,4 +1,7 @@
 #!/usr/bin/perl
+use strict;
+use warnings;
+#use File::Slurp;
 
 # Utility to add new disks to the emulator
 
@@ -6,6 +9,12 @@ my $VERSION = "1.0.0";
 my $APPLE2JSDIR = "/home/apple2/apple2js";
 my $DISKSDIR = "$APPLE2JSDIR/json/disks";
 my $NUMARGS = $#ARGV + 1;
+
+my $skiphead = 0;
+my $skipfoot = 0;
+my $infile   = "$DISKSDIR/index.json";
+my $outfile  = "/tmp/newindex.txt";
+my @buffer   = ();
 
 print "adsk2json v$VERSION\n";
 print "====================\n";
@@ -45,19 +54,34 @@ if (($confirm eq "n") || ($confirm eq "N"))
 	print "Not adding \"$FILENAME\" to index.json\n";
 	exit 0;
 }
+print "Creating new edition:\n";
+system("./bin/dsk2json -c \"$FILECAT\" -n \"$FILENAME\" \"$DISKSDIR/$DISKFILENAME.dsk\" > \"$DISKSDIR/$DISKFILENAME.json\"");
 print "Adding \"$FILENAME\" to index.json:\n";
 my $ShortName = substr("$DISKSDIR/$DISKFILENAME.json", 22);
 #print "Shortname '$ShortName'\n";
 my $templatefile = <<"END_TEMPLATE";
-,
+  },
   {
     "filename": "$ShortName",
     "name": "$FILENAME",
     "category": "$FILECAT"
   }
+]
 END_TEMPLATE
 
+#my $file_content = read_file($infile);
+#print "File contents:\n$file_content\n";
+open(IN, '<', $infile) || die "Cannot open $infile for reading: $!";
+my @FileLines = <IN>;
+pop(@FileLines);
+pop(@FileLines);
+push(@FileLines, $templatefile);
+print (@FileLines);
+exit 0;
+open(OUT, '>', $outfile) || die "Cannot open $outfile for writing: $!";
+
+print OUT $templatefile;
+close OUT;
 #print "Template = '$templatefile'\n";
 
-system("./bin/dsk2json -c \"$FILECAT\" -n \"$FILENAME\" \"$DISKSDIR/$DISKFILENAME.dsk\" > \"$DISKSDIR/$DISKFILENAME.json\"");
 exit 0;
