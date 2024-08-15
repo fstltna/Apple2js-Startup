@@ -46,5 +46,18 @@ if (($confirm eq "n") || ($confirm eq "N"))
 	exit 0;
 }
 print "Adding \"$FILENAME\" to index.json:\n";
+my $ShortName = substr("$DISKSDIR/$DISKFILENAME.json", 22);
+#print "Shortname '$ShortName'\n";
+my $templatefile = <<"END_TEMPLATE";
+,
+  {
+    "filename": "$ShortName",
+    "name": "$FILENAME",
+    "category": "$FILECAT"
+  }
+END_TEMPLATE
+
+#print "Template = '$templatefile'\n";
+
 system("./bin/dsk2json -c \"$FILECAT\" -n \"$FILENAME\" \"$DISKSDIR/$DISKFILENAME.dsk\" > \"$DISKSDIR/$DISKFILENAME.json\"");
 exit 0;
