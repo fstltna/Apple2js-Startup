@@ -1,0 +1,67 @@
+#!/usr/bin/perl
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 1, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+my $APPLE2JSDIR = "/var/www/html/apple2js";
+my $SCREENCMD = "/usr/bin/screen";
+
+# No changes below here...
+
+my $startpath = $ENV{'PATH'};
+my $newpath = "$APPLE2JSDIR/exec:$startpath";
+my $exists = "";
+my $NPMCOMMAND = "npm start";
+
+# Set ENV vars
+$ENV{'PATH'} = $newpath;
+$ENV{'TERM'} = "xterm-256color";
+
+my $running=`ps ax|grep "npm start"|grep -v grep`;
+
+# check if Apple2js process is running
+if ($running ne "")
+{
+	print ("Startupscript already running...\n");
+	exit (0);
+}
+
+while (-1)
+{
+	chdir $APPLE2JSDIR;
+	# check if Apple2js process is running
+	$running=`ps ax|grep "npm start"|grep -v grep`;
+	if ($running eq "")
+	{
+		print "Apple2js not running\n";
+		# See if they want the server started
+		if (! -f "$APPLE2JSDIR/nostart")
+		{
+			# The Log Entry
+			my $datestring = localtime();
+			my $TIME="Apple2js Down, Restarting: $datestring";
+			open(OUTF, ">>$APPLE2JSDIR/Apple2jsScreen.log") || die "Unable to open $APPLE2JSDIR/Apple2jsScreen.log for appending";
+			print (OUTF "$TIME\n");
+			close($OUTF);
+			chdir $APPLE2JSDIR;
+			print "Starting screen process\n";
+			my $command = "$SCREENCMD -fa -S Apple2js -d -U -m $NPMCOMMAND";
+			#print "Command = '$command'\n";
+			system($command);
+		}
+	}
+	# Sleep for 1 minute before checking again
+	sleep(90);
+}
+exit(0);
