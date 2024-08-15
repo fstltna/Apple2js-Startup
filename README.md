@@ -1,4 +1,4 @@
-# Apple2js Startup Scripts (1.0.0)
+# Apple2js Startup Scripts (0.3.0)
 Startup scripts for the Apple2js Apple 8-bit emulator - uses the "screen" command to manage a session. This also restarts the apple2js process if it crashes.
 
 Official support sites: [Official Github Repo](https://github.com/fstltna/Apple2js-Startup) - [Official Forum](https://appleii.retro-os.live/index.php/forum/our-apple-e-web-emulator-tools)  - [Official Download Area](https://appleii.retro-os.live/index.php/downloads/category/23-our-server-tools)
