@@ -21,9 +21,12 @@ my $FILECAT = $ARGV[1];
 my $FILENAME = $ARGV[2];
 
 chdir($APPLE2JSDIR);
-if (! -f "$DISKSDIR/$DISKFILENAME.json")
+
+#print "File = '$DISKSDIR/$DISKFILENAME.dsk'\n";
+
+if (! -f "$DISKSDIR/$DISKFILENAME.dsk")
 {
-	print "File not found: $DISKSDIR/$DISKFILENAME.json\n";
+	print "File not found: '$DISKSDIR/$DISKFILENAME.dsk'\n";
 	exit (1);
 }
 
@@ -32,14 +35,16 @@ print "Using Category: $FILECAT\n";
 print "Using Name: $FILENAME\n";
 
 print "Does this look ok? [Y/n]: ";
-my $confirm = <>;
+my $confirm = <STDIN>;
 chop ($confirm);
 
-print "confirm = '$confirm'\n";
+#print "confirm = '$confirm'\n";
 
 if (($confirm eq "n") || ($confirm eq "N"))
 {
+	print "Not adding \"$FILENAME\" to index.json\n";
 	exit 0;
 }
+print "Adding \"$FILENAME\" to index.json:\n";
 system("./bin/dsk2json -c \"$FILECAT\" -n \"$FILENAME\" \"$DISKSDIR/$DISKFILENAME.dsk\" > \"$DISKSDIR/$DISKFILENAME.json\"");
 exit 0;
