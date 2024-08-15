@@ -69,19 +69,18 @@ my $templatefile = <<"END_TEMPLATE";
 ]
 END_TEMPLATE
 
-#my $file_content = read_file($infile);
-#print "File contents:\n$file_content\n";
 open(IN, '<', $infile) || die "Cannot open $infile for reading: $!";
 my @FileLines = <IN>;
+close IN;
 pop(@FileLines);
 pop(@FileLines);
 push(@FileLines, $templatefile);
-print (@FileLines);
-exit 0;
 open(OUT, '>', $outfile) || die "Cannot open $outfile for writing: $!";
-
-print OUT $templatefile;
+print (OUT @FileLines);
 close OUT;
+
+print "All done!\n";
+
 #print "Template = '$templatefile'\n";
 
 exit 0;
