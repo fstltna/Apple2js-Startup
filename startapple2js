@@ -14,7 +14,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-my $APPLE2JSDIR = "/var/www/html/apple2js";
+my $APPLE2JSDIR = "/home/apple2/apple2js";
 my $SCREENCMD = "/usr/bin/screen";
 
 # No changes below here...
