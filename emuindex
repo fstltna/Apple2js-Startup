@@ -1,5 +1,6 @@
 #!/usr/bin/perl
 
-my $APPLE2JSDIR = "";
+my $APPLE2JSDIR = "/home/apple2/apple2js";
+chdir($APPLE2JSDIR);
 system("./bin/index");
 exit 0;

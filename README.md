@@ -8,8 +8,9 @@ These start up the apple2js server at boot time with a "screen" process.
 
 1. Copy **apple2js** into **/home/apple2/bin** - make sure it is executable
 2. Copy **emuindex** into **/home/apple2/bin** - make sure it is executable
-3. Copy **startapple2js** into **/home/apple2/apple2js** - make sure it is executable
-4. Put **@reboot /home/apple2/bin/apple2js start** into your crontab
+3. Copy **adsk2json** into **/home/apple2/bin** - make sure it is executable
+4. Copy **startapple2js** into **/home/apple2/apple2js** - make sure it is executable
+5. Put **@reboot /home/apple2/bin/apple2js start** into your crontab
 
 When you want to view the Apple2js console, just enter "**screen -r**" in your shell.
 
