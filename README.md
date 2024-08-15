@@ -1,8 +1,7 @@
 # Apple2js Startup Scripts (1.0.0)
 Startup scripts for the Apple2js Apple 8-bit emulator - uses the "screen" command to manage a session. This also restarts the apple2js process if it crashes.
 
-Official support sites: [Official Github Repo](https://github.com/fstltna/CoffeeStartup) - [Official Forum](https://pocketmud.com/index.php/forum/server-utils)  - [Official Download Area](https://pocketmud.com/index.php/download-upload/category/4-servers)
-![Coffee MUD Sample Screen](https://pocketmud.com/coffee_mud.png)
+Official support sites: [Official Github Repo](https://github.com/fstltna/Apple2js-Startup) - [Official Forum](https://appleii.retro-os.live/index.php/forum/our-apple-e-web-emulator-tools)  - [Official Download Area](https://appleii.retro-os.live/index.php/downloads/category/23-our-server-tools)
 
 ---
 These start up the apple2js server at boot time with a "screen" process.
