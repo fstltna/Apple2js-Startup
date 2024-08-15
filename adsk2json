@@ -79,6 +79,8 @@ open(OUT, '>', $outfile) || die "Cannot open $outfile for writing: $!";
 print (OUT @FileLines);
 close OUT;
 
+print "Installing the new file:\n";
+system("/usr/bin/cp $outfile $infile");
 print "Updating the index:\n";
 system ("/home/apple2/bin/emuindex");
 print "All done!\n";
